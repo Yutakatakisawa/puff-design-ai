@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, Layout, LayoutDashboard, Smartphone, Layers } from "lucide-react";
-import type { ComponentProps } from "@/lib/types";
+import type { ComponentProps, LayoutStructure } from "@/lib/types";
 import { useCanvasStore } from "@/lib/store";
 import { generateLayoutFromPrompt, getTemplates } from "@/lib/generate-layout";
 
@@ -24,7 +24,7 @@ export function LeftPanel() {
     }
   };
 
-  const applyTemplate = (layout: { layout: { id: string; type: string; props?: Record<string, unknown> }[] }) => {
+  const applyTemplate = (layout: LayoutStructure) => {
     setLayout(layout);
   };
 

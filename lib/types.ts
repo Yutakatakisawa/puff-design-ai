@@ -18,6 +18,8 @@ export interface LayoutStructure {
 
 export interface ComponentProps {
   text?: string;
+  subtext?: string;
+  buttonText?: string;
   color?: string;
   backgroundColor?: string;
   padding?: number;
