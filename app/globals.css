@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface-900: #0f0d14;
+  --surface-800: #16141d;
+  --surface-700: #1e1b26;
+  --accent: #8b5cf6;
+  --accent-light: #a78bfa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--surface-900);
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+/* Glass panel */
+.glass-panel {
+  @apply bg-surface-800/80 backdrop-blur-xl border border-white/5;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
+
+/* Selection outline on canvas */
+.canvas-selection {
+  @apply ring-2 ring-accent ring-offset-2 ring-offset-surface-900 rounded;
+}
+
+.canvas-hover {
+  @apply ring-2 ring-accent/50 ring-offset-2 ring-offset-surface-900 rounded transition-all;
+}
