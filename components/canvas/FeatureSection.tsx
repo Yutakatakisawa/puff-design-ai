@@ -26,9 +26,10 @@ export function FeatureSection({
   const featureDescs = (props?.featureDescs as string)?.split("|").map((s) => s.trim()).filter(Boolean);
   const fontSize = props?.fontSize ?? 20;
   const padding = props?.padding ?? 20;
+  const fallbackItems = subtext ? subtext.split(/[・|、]/).map((s) => s.trim()).filter(Boolean) : ["Feature 1", "Feature 2", "Feature 3"];
   const features = featureItems?.length
-    ? featureItems.map((title, i) => ({ title, desc: featureDescs?.[i] }))
-    : (subtext ? subtext.split(/[・|、]/).map((s) => s.trim()).filter(Boolean) : ["Feature 1", "Feature 2", "Feature 3"]).map((f) => (typeof f === "string" ? { title: f, desc: "" } : { title: f.title ?? "", desc: f.desc ?? "" }));
+    ? featureItems.map((title, i) => ({ title, desc: featureDescs?.[i] ?? "" }))
+    : fallbackItems.map((f) => ({ title: f, desc: "" }));
 
   return (
     <section
@@ -53,8 +54,8 @@ export function FeatureSection({
             key={i}
             className="rounded-xl bg-white/5 border border-white/10 p-3 text-xs"
           >
-            <span className="font-medium block">{typeof f === "object" ? f.title : f}</span>
-            {(typeof f === "object" && f.desc) ? <span className="opacity-80 mt-1 block text-[11px]">{f.desc}</span> : null}
+            <span className="font-medium block">{f.title}</span>
+            {f.desc ? <span className="opacity-80 mt-1 block text-[11px]">{f.desc}</span> : null}
           </div>
         ))}
       </div>
