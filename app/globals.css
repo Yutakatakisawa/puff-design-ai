@@ -18,11 +18,16 @@ body {
   background: var(--surface-900);
   color: #e2e8f0;
   min-height: 100vh;
+  letter-spacing: 0.01em;
+  font-feature-settings: "ss01" on, "cv01" on;
 }
 
 /* Glass panel */
 .glass-panel {
-  @apply bg-surface-800/80 backdrop-blur-xl border border-white/5;
+  @apply bg-surface-800/80 backdrop-blur-xl border border-white/10;
+  box-shadow:
+    0 8px 40px rgba(8, 8, 12, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 /* Scrollbar */
@@ -52,4 +57,23 @@ body {
 
 .canvas-hover {
   @apply ring-2 ring-accent/50 ring-offset-2 ring-offset-surface-900 rounded transition-all;
+}
+
+.premium-gradient {
+  background:
+    radial-gradient(1200px 500px at 20% -20%, rgba(139, 92, 246, 0.22), transparent 70%),
+    radial-gradient(1200px 500px at 80% -20%, rgba(59, 130, 246, 0.16), transparent 70%),
+    linear-gradient(180deg, #0c0a12 0%, #0f0d14 100%);
+}
+
+.section-shell {
+  @apply rounded-2xl border border-white/10 shadow-[0_10px_28px_rgba(2,6,23,0.3)];
+}
+
+.section-title {
+  @apply text-[1.12rem] font-semibold tracking-tight;
+}
+
+.section-subtitle {
+  @apply text-sm opacity-80 leading-relaxed;
 }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Puff Design AI — AI UI Builder",
+  title: "Puff Design — AI UI Builder",
   description: "Generate and edit UI layouts with AI. Type a prompt, get a design.",
 };
 

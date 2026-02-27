@@ -4,6 +4,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { motion } from "framer-motion";
 import type { LayoutBlock } from "@/lib/types";
+import { MOTION } from "@/lib/motion";
 import { CanvasBlock } from "./canvas/CanvasBlock";
 
 interface SortableBlockProps {
@@ -43,7 +44,8 @@ export function SortableBlock({
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      className={isDragging ? "opacity-50 z-50" : ""}
+      transition={MOTION.smooth}
+      className={`${isDragging ? "opacity-50 z-50" : ""} mb-3 last:mb-0`}
       {...attributes}
       {...listeners}
     >

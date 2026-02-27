@@ -21,13 +21,14 @@ export function Footer({
   onMouseLeave,
 }: FooterProps) {
   const text = props?.text ?? "© 2025 Your Company";
+  const subtext = props?.subtext as string | undefined;
   const fontSize = props?.fontSize ?? 12;
   const padding = props?.padding ?? 16;
 
   return (
     <footer
       className={`
-        w-full border-t border-white/5 transition-all cursor-pointer
+        w-full border-t border-white/5 transition-all cursor-pointer section-shell
         ${isSelected ? "canvas-selection" : ""}
         ${isHovered && !isSelected ? "canvas-hover" : ""}
       `}
@@ -40,7 +41,10 @@ export function Footer({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {text}
+      <div className="flex flex-col gap-1">
+        <span>{text}</span>
+        {subtext && <span className="text-[11px] opacity-80">{subtext}</span>}
+      </div>
     </footer>
   );
 }

@@ -1,18 +1,26 @@
 "use client";
 
 import { create } from "zustand";
-import type { LayoutBlock, LayoutStructure, ComponentProps } from "./types";
+import type { LayoutStructure, ComponentProps, PreviewMode, DesignMode } from "./types";
 
 interface CanvasState {
   layout: LayoutStructure;
+  variants: LayoutStructure[];
+  activeVariant: number;
   selectedId: string | null;
   selectedProps: ComponentProps | null;
+  designMode: DesignMode;
+  previewMode: PreviewMode;
   zoom: number;
   isGenerating: boolean;
   setLayout: (layout: LayoutStructure) => void;
+  setVariants: (variants: LayoutStructure[]) => void;
+  setActiveVariant: (index: number) => void;
   setSelectedId: (id: string | null) => void;
   setSelectedProps: (props: ComponentProps | null) => void;
+  setDesignMode: (mode: DesignMode) => void;
   updateBlockProps: (id: string, props: Partial<ComponentProps>) => void;
+  setPreviewMode: (mode: PreviewMode) => void;
   setZoom: (zoom: number) => void;
   reorderBlocks: (fromIndex: number, toIndex: number) => void;
   setIsGenerating: (v: boolean) => void;
@@ -20,13 +28,33 @@ interface CanvasState {
 
 export const useCanvasStore = create<CanvasState>((set) => ({
   layout: { layout: [] },
+  variants: [],
+  activeVariant: 0,
   selectedId: null,
   selectedProps: null,
+  designMode: "app",
+  previewMode: "mobile",
   zoom: 84,
   isGenerating: false,
   setLayout: (layout) => set({ layout, selectedId: null, selectedProps: null }),
+  setVariants: (variants) =>
+    set({
+      variants,
+      activeVariant: 0,
+      layout: variants[0] ?? { layout: [] },
+      selectedId: null,
+      selectedProps: null,
+    }),
+  setActiveVariant: (index) =>
+    set((state) => ({
+      activeVariant: index,
+      layout: state.variants[index] ?? state.layout,
+      selectedId: null,
+      selectedProps: null,
+    })),
   setSelectedId: (selectedId) => set({ selectedId }),
   setSelectedProps: (selectedProps) => set({ selectedProps }),
+  setDesignMode: (designMode) => set({ designMode }),
   updateBlockProps: (id, props) =>
     set((state) => {
       const layout = state.layout.layout.map((block) =>
@@ -41,6 +69,7 @@ export const useCanvasStore = create<CanvasState>((set) => ({
       };
     }),
   setZoom: (zoom) => set({ zoom: Math.max(25, Math.min(150, zoom)) }),
+  setPreviewMode: (previewMode) => set({ previewMode }),
   reorderBlocks: (fromIndex, toIndex) =>
     set((state) => {
       const blocks = [...state.layout.layout];
